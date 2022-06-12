@@ -12,9 +12,9 @@ function App() {
 
   const submitHandler = (empData) => {
     console.log(`Adding empData: ${empData}`)
+    console.log(employeeDetails)
     setEmployeeDetails([...employeeDetails, empData])
   }
-
 
   return (
     <React.Fragment>
@@ -23,13 +23,13 @@ function App() {
       </header>
       <main>
         <Card>
-          { addEmployee && <EmployeeForm submitHandler={submitHandler} />}
+          { addEmployee && <EmployeeForm employeeDetails={employeeDetails} submitHandler={submitHandler} />}
         </Card>
         <div className={classes.buttonContainer}>
           <button onClick={() => setAddEmployee(true)} >Add Employee</button>
           <button onClick={() => setViewData(true)}>View Data</button>
         </div>
-        {viewData && <EmployeeDetails/>}
+        {viewData && <EmployeeDetails employeeDetails={employeeDetails} />}
       </main>
     </React.Fragment>
   );

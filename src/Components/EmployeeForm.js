@@ -6,6 +6,8 @@ import classes from './EmployeeForm.module.css'
 
 const EmployeeForm = (props) => {
   const [contactDetails, setContactDetails] = useState([])
+  const [allSkills, setAllSkills] = useState([])
+  const [empDetails, setEmpDetails] = useState([])
 
   const nameRef = useRef();
   const designationRef = useRef();
@@ -13,15 +15,19 @@ const EmployeeForm = (props) => {
 
   const formSubmitHandler = (event) => {
       event.preventDefault();
-      let empData = {
+      const empData = {
         name: nameRef.current.value,
         designation: designationRef.current.value,
         contact: contactDetails,
-        skills: [],
+        skills: allSkills,
         dob: dobRef.current.value
       }
-      console.log(empData)
-      props.submitHandler(empData);
+      props.submitHandler(empData)
+
+      // setEmpDetails([...empDetails, empData])
+
+      setContactDetails([]);
+      setAllSkills([]);
       document.getElementById('form').reset();
   }
   return (
@@ -40,7 +46,7 @@ const EmployeeForm = (props) => {
             <PhoneNumber inputList={contactDetails} setInputList={setContactDetails} />
           </div>
           <div className={classes.control}>
-            <Skills />
+            <Skills allSkills={allSkills} setAllSkills={setAllSkills} />
           </div>
           <div className={classes.control}>
             <label>Date of Birth:</label>

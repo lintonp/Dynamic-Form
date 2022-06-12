@@ -1,8 +1,13 @@
 import React from 'react'
+import Card from './UI/Card'
+import EmployeeDetail from './EmployeeDetail'
 
-const EmployeeDetails = () => {
+const EmployeeDetails = (props) => {
+  let count=1
   return (
-    <div>EmployeeDetails</div>
+    <Card>
+      {props.employeeDetails.map((emp) => <EmployeeDetail emp={emp} counter={count++} />)}
+    </Card>
   )
 }
 
