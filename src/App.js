@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import classes from './App.module.css';
+import EmployeeDetails from './Components/EmployeeDetails';
+import EmployeeForm from './Components/EmployeeForm';
+
+import Card from './Components/UI/Card'
 
 function App() {
+  const [addEmployee, setAddEmployee] = useState(false);
+  const [viewData, setViewData] = useState(false);
+  const [employeeDetails, setEmployeeDetails] = useState([]);
+
+  const submitHandler = (empData) => {
+    console.log(`Adding empData: ${empData}`)
+    setEmployeeDetails([...employeeDetails, empData])
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <React.Fragment>
+      <header className='centered'>
+        <h1>Employee Data</h1>
       </header>
-    </div>
+      <main>
+        <Card>
+          { addEmployee && <EmployeeForm submitHandler={submitHandler} />}
+        </Card>
+        <div className={classes.buttonContainer}>
+          <button onClick={() => setAddEmployee(true)} >Add Employee</button>
+          <button onClick={() => setViewData(true)}>View Data</button>
+        </div>
+        {viewData && <EmployeeDetails/>}
+      </main>
+    </React.Fragment>
   );
 }
 

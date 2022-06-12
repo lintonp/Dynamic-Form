@@ -1,0 +1,11 @@
+.buttonContainer{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-content:  space-around;
+    align-self: center;
+}
+
+.buttonContainer button{
+    margin: 5px;
+}
