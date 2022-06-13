@@ -16,7 +16,7 @@ const EmployeeForm = (props) => {
   const formSubmitHandler = (event) => {
       event.preventDefault();
       const empData = {
-        name: nameRef.current.value,
+        nam: nameRef.current.value,
         designation: designationRef.current.value,
         contact: contactDetails,
         skills: allSkills,
