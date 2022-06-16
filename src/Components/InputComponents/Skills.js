@@ -15,7 +15,7 @@ const Skills = (props) => {
       console.log('Enter valid skill')
       return;
     }
-    if(props.allSkills.indexOf(skill) > 0){
+    if(props.allSkills.indexOf(skill) >= 0){
       console.log("Skill exists")
       return;
     }
