@@ -11,10 +11,18 @@ const PhoneNumber = (props) => {
 
   const addPhoneNumber = (event) => {
     event.preventDefault()
-    console.log(`Counter: ${props.inputList.length}`)
-    if(props.inputList.length<3){
+
+    console.log(props.inputList);
+
+    if(props.inputList.length>0 && props.inputList.filter((contact)=>{
+      return contact.type === inputTypeRef.current.value
+    })){
+      console.log("Contact Type Exists");
+      return;
+    }
+    if(props.inputList.length<4){
       console.log(`Counter: ${props.inputList}`)
-      props.setInputList([...props.inputList, {typ:inputTypeRef.current.value, detail:inputNumberRef.current.value}]);      
+      props.setInputList([...props.inputList, {type:inputTypeRef.current.value, number:inputNumberRef.current.value}]);      
     }
     else{
       setAddButton(true);
@@ -22,18 +30,22 @@ const PhoneNumber = (props) => {
   }
 
   let phoneInput = props.inputList.map((item) => {
-    return <div key={item.typ}>
-      <Input key={item.typ} value={item.typ} />
-      <Input key={item.detail} value={item.detail} />    
+    return <div key={item.type}>
+      <Input value={item.type} />
+      <Input value={item.number} />    
     </div>
   })
 
   return (
     <div>
       {phoneInput}
-      <input type="text" ref={inputTypeRef} />
-      <input type='tel' ref={inputNumberRef} />
-      <button onClick={addPhoneNumber} disabled={addButton}>+</button>
+      {props.inputList.length<4 ?  
+      <>
+        <input type="text" ref={inputTypeRef} />
+        <input type='tel' ref={inputNumberRef} />
+      </>         
+      : null}
+      <button onClick={addPhoneNumber} disabled={props.inputList.length>3}>+</button>
     </div>
   )
 }
